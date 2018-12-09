@@ -8,10 +8,13 @@ cp -p ../modulo2/.editorconfig .
 cp -p ../modulo2/.eslintrc .eslintrc.json
 
 rm -f public/manifest.json src/*.css src/App.test.js src/logo.svg src/serviceWorker.js
+
+code .
+
+remover referências aos arquivos deletados de public/index.html, src/index.js e src/App.js
+
 rm -fR node_modules
 
 yarn
 
-code .
-
-remover referências aos arquivos deletados em index.html, index.js e App.js
+yarn start
