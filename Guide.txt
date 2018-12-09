@@ -1,0 +1,17 @@
+create-react-app modulo3
+
+cd modulo3
+
+yarn add eslint@"5.6.0" eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react -D
+
+cp -p ../modulo2/.editorconfig .
+cp -p ../modulo2/.eslintrc .eslintrc.json
+
+rm -f public/manifest.json src/*.css src/App.test.js src/logo.svg src/serviceWorker.js
+rm -fR node_modules
+
+yarn
+
+code .
+
+remover referências aos arquivos deletados em index.html, index.js e App.js
