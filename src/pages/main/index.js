@@ -6,17 +6,19 @@ import { bindActionCreators } from 'redux';
 import * as FavoriteActions from '../../store/actions/favorites';
 
 class Main extends Component {
-  propTypes = {
+  static propTypes = {
     addFavoriteRequest: PropTypes.func.isRequired,
     //  removeFavorite: PropTypes.func.isRequired,
-    favorites: PropTypes.arrayOf(
-      PropTypes.shape({
+    favorites: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
         description: PropTypes.string,
         url: PropTypes.string,
-      }),
-    ).isRequired,
+      })),
+      error: PropTypes.oneOfType([null, PropTypes.string]),
+    }).isRequired,
   };
 
   state = {
@@ -56,11 +58,15 @@ class Main extends Component {
             value={this.state.repositoryInput}
             onChange={e => this.setState({ repositoryInput: e.target.value })}
           />
-          <button type="submit">Adicionar</button>
+          <button type="submit">Adicionar </button>
+          {this.props.favorites.loading && <span>Carregando...</span>}
+          {!!this.props.favorites.error && (
+            <span style={{ color: '#F00' }}>{this.props.favorites.error}</span>
+          )}
         </form>
 
         <ul>
-          {this.props.favorites.map(favorite => (
+          {this.props.favorites.data.map(favorite => (
             <li key={favorite.id}>
               <p>
                 <strong>{favorite.name}</strong>
